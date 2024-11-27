@@ -42,7 +42,7 @@ class ChamadosController extends Controller
 
     public function list()
     {
-        $chamados = Chamados::where('status', 1)->orderBy('created_at', 'desc')->get();
+        $chamados = Chamados::orderBy('created_at', 'desc')->get();
 
         return response()->json(['data' => $chamados, 'message' => 'Chamados listados com sucesso!'], 200);
     }
@@ -63,6 +63,7 @@ class ChamadosController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'status' => 'required|integer'
         ]);
 
         if ($validator->fails()) {
@@ -73,9 +74,25 @@ class ChamadosController extends Controller
             $chamado = Chamados::find($id);
             $chamado->title = $request->input('title');
             $chamado->description = $request->input('description');
+            $chamado->status = $request->input('status');
             $chamado->save();
 
             return response()->json(['data' => $chamado, 'message' => 'Chamado atualizado com sucesso!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy($id){
+        $chamado = Chamados::find($id);
+
+        if(!$chamado){
+            return response()->json(['message' => 'Chamado não encontrado'], 404);
+        }
+
+        try {
+            $chamado->delete();
+            return response()->json(['message' => 'Chamado deletado com sucesso!'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }

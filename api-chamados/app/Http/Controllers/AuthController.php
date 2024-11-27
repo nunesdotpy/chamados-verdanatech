@@ -40,10 +40,11 @@ class AuthController extends Controller
         }
 
         if (!$accessToken = auth()->attempt($input)) {
-            return response()->json(['message' => 'Sem autorização'], 401);
+            return response()->json(['message' => 'Sem autorização'], 400);
         }
 
         $user = [
+            'id' => auth()->user()->id,
             'name' => auth()->user()->name,
             'email' => auth()->user()->email,
             'token' => $accessToken,
