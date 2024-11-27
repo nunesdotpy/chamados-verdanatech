@@ -8,6 +8,9 @@ use App\Http\Middleware\Authenticate;
 Route::get('/', function () {
     return view('auth.login');
 })->name('home');
+Route::get('register', function (){
+    return view('auth.register');
+})->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware([Authenticate::class])->group(function () {
