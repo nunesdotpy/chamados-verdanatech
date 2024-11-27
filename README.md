@@ -24,3 +24,13 @@ No backend _./api-chamados_ precisamos rodar nossas Migrates para o banco de dad
 
 ## Configurações do .env
 O .env de ambos os ambientes foi disponibilizado no GitHub para facilitar a execução dos ambientes.
+
+## Rodar o projeto
+
+Agora é só rodar `php artisan serve` em _./front-chamados_ e depois em _./api-chamados_
+
+Após isso é só acessar atraves do [localhost](http://localhost:8000/)
+
+### Lembrete
+
+Confirme que o backend esteja rodando na porta 3001, caso essa porta esteja ocupada faça a mudança no .env de _./front-chamados_ na opção de `API_URL` para a porta correta.
