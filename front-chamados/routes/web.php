@@ -12,6 +12,7 @@ Route::get('register', function (){
     return view('auth.register');
 })->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('register', [AuthController::class, 'register'])->name('register.store');
 
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

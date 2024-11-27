@@ -36,6 +36,12 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
+            <!-- Sucesso -->
+            @if(Session::has('success'))
+                <div class="text-green-500 text-sm mt-2 text-center">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
     
             <!-- Botão de Login -->
             <div>

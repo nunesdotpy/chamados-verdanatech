@@ -20,6 +20,17 @@ class AuthController extends Controller
         return redirect()->route("dashboard");
     }
 
+    public function register(Request $request)
+    {
+        $response = self::fetch(env("API_URL")."register", "POST",$request->except("_token"));
+        
+        if($response['httpcode'] == 400){
+            return redirect()->route("home")->with("error", $response["message"]);
+        }
+
+        return redirect()->route("home")->with("success", $response["message"]);
+    }
+
     public function logout()
     {  
         // desloga nop backend
